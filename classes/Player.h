@@ -18,6 +18,7 @@ private:
   int losses;
   int draws;
   std::string name;
+  static int identifier;
 };
 
 #endif
