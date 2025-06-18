@@ -2,7 +2,7 @@
 
 int Player::identifier = 1;
 
-Player::Player() : wins(0), losses(0), draws(0), name("Player" + std::to_string(Player::identifier++)){};
+Player::Player() : wins(0), losses(0), draws(0), name("Player " + std::to_string(Player::identifier++)){};
 
 Player::Player(std::string name) : wins(0), losses(0), draws(0), name(name){};
 

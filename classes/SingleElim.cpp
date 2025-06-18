@@ -15,14 +15,22 @@ void SingleElim::createBracket() {
   std::vector<Pairing> newRound;
 
   for (int i = 0; i < participants; i+=2) {
-    newRound.push_back(Pairing(&players[i], &players[i+1]));
+    if (i+1 >= participants) {
+      newRound.push_back(Pairing(&players[i], new Player("Bye")));
+    } else {
+      newRound.push_back(Pairing(&players[i], &players[i+1]));
+    }
   }
   rounds.push_back(newRound);
 
   for (int round = 1; round < static_cast<int>(std::ceil(participants / 2.0)); round++) {
     std::vector<Pairing> currRound;
     for (int i = 0; i < rounds[round-1].size(); i+=2) {
-      currRound.push_back(Pairing(rounds[round-1][i].winner, rounds[round-1][i+1].winner));
+      if (rounds[round-1][i+1].winner != nullptr) {
+        currRound.push_back(Pairing(rounds[round-1][i].winner, rounds[round-1][i+1].winner));
+      } else {
+        currRound.push_back(Pairing(rounds[round-1][i].winner, new Player("Bye"))); 
+      }
     }
     rounds.push_back(currRound);
   }
