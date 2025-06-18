@@ -7,6 +7,11 @@ class Player {
 public:
   Player();
   Player(std::string name);
+  void addWin();
+  void addLoss();
+  void addDraw();
+  int* getRecord();
+  std::string getName();
 
 private:
   int wins;
