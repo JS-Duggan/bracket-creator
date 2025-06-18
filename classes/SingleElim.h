@@ -3,9 +3,10 @@
 
 #include "Bracket.h"
 
-Class SingleElim : Bracket {
+class SingleElim : public Bracket {
 public:
-  void generateBracket();
+  SingleElim(std::vector<Player> players);
+  void createBracket();
   void nextRound();
 };
 

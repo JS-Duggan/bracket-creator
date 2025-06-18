@@ -5,7 +5,9 @@
 #include "SingleElim.h"
 #include "Pairing.h"
 
-void SingleElim::generateBracket() {
+SingleElim::SingleElim(std::vector<Player> players): Bracket(players) {}
+
+void SingleElim::createBracket() {
   int participants = players.size();
   std::random_device rd;
   std::mt19937 rng(rd());
@@ -13,7 +15,7 @@ void SingleElim::generateBracket() {
   std::vector<Pairing> newRound;
 
   for (int i = 0; i < participants; i+=2) {
-    newRound.push_back(Pairing(players[i], players[i+1]));
+    newRound.push_back(Pairing(&players[i], &players[i+1]));
   }
   rounds.push_back(newRound);
 

@@ -1,18 +1,20 @@
 #include "Player.h"
 
-Player::Player() : wins(0), losses(0), draws(0), name("Player" + Player::identifier++){};
+int Player::identifier = 1;
+
+Player::Player() : wins(0), losses(0), draws(0), name("Player" + std::to_string(Player::identifier++)){};
 
 Player::Player(std::string name) : wins(0), losses(0), draws(0), name(name){};
 
-void Player::addWin() { Player::wins++; }
+void Player::addWin() { wins++; }
 
-void Player::addLoss() { Player::losses++; }
+void Player::addLoss() { losses++; }
 
-void Player::addDraw() { Player::draws++; }
+void Player::addDraw() { draws++; }
 
 int* Player::getRecord() {
-  int* record = new int[3]{ Player::wins, Player::losses, Player::draws };
+  int* record = new int[3]{ wins, losses, draws };
   return record;
 }
 
-std::string Player::getName() { return Player::name; }
+std::string Player::getName() { return name; }

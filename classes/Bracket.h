@@ -9,9 +9,11 @@ class Bracket {
 public:
   Bracket();
   Bracket(std::vector<Player> players);
-  virtual void createBracket();
-  virtual void nextRound();
-private:
+  void displayBracket();
+  virtual void createBracket()=0;
+//  virtual void nextRound()=0;
+  
+protected:
   std::vector<Player> players;
   std::vector<std::vector<Pairing>> rounds;
   int roundsComplete = 0;
