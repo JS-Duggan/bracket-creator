@@ -12,6 +12,8 @@ struct Pairing {
   Player* winner = nullptr;
   Player* loser = nullptr;
   bool draw = false;
+
+  void setWinner(int index);
 };
 
 #endif

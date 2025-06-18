@@ -7,7 +7,7 @@ class SingleElim : public Bracket {
 public:
   SingleElim(std::vector<Player> players);
   void createBracket();
-  void nextRound();
+  void runBracket();
 };
 
 #endif

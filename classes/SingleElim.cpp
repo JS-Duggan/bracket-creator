@@ -1,6 +1,10 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
+#include <iomanip>
+#include <cstdlib>
+
+#include <iostream>
 
 #include "SingleElim.h"
 #include "Pairing.h"
@@ -35,5 +39,22 @@ void SingleElim::createBracket() {
     rounds.push_back(currRound);
   }
 }
-  
+
+void SingleElim::runBracket() {
+  for (int i = 0; i < rounds[roundsComplete].size(); i++) {
+    if (rounds[roundsComplete][i].Player2->getName() == "Bye") {
+      rounds[roundsComplete][i].setWinner(1);
+      continue;
+    }
+    system("clear");
+    displayBracket();
+    int winner;
+    std::cout << std::endl;
+    std::cout << "Winner for Game " << i + 1 << " [ 1 / 2 ]: ";
+    std::cin >> winner;
+    if (winner < 0 || winner > 2) i--;
+    rounds[roundsComplete][i].setWinner(winner);
+  }
+  roundsComplete++;
+}
 
