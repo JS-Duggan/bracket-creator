@@ -12,4 +12,6 @@ void Pairing::setWinner(int index) {
     winner = Player2;
     loser = Player1;
   }
+  winner->addWin();
+  loser->addLoss();
 }
