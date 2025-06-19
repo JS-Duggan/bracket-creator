@@ -12,6 +12,7 @@ Bracket::Bracket() {};
 Bracket::Bracket(std::vector<Player> players) : players(players){};
 
 void Bracket::displayBracket() {
+  system("clear");
   for (int i = 0; i < roundsComplete + 1; i++) {
     std::cout << "Round " << i + 1 << ":" << std::endl;
     for (int j = 0; j < rounds[i].size(); j++) {

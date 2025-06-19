@@ -1,9 +1,7 @@
 #include <cmath>
 #include <algorithm>
 #include <random>
-#include <iomanip>
 #include <cstdlib>
-
 #include <iostream>
 
 #include "SingleElim.h"
@@ -30,22 +28,33 @@ void SingleElim::createBracket() {
 }
 
 void SingleElim::runBracket() {
-  for (int i = 0; i < rounds[roundsComplete].size(); i++) {
-    if (rounds[roundsComplete][i].Player2->getName() == "Bye") {
-      rounds[roundsComplete][i].setWinner(1);
-      continue;
+  while (rounds[roundsComplete].size() != 1) {
+    for (int i = 0; i < rounds[roundsComplete].size(); i++) {
+      if (rounds[roundsComplete][i].Player2->getName() == "Bye") {
+        rounds[roundsComplete][i].setWinner(1);
+        continue;
+      }
+      displayBracket();
+      int winner;
+      std::cout << std::endl;
+      std::cout << "Winner for Game " << i + 1 << " [ 1 / 2 ]: ";
+      std::cin >> winner;
+      if (winner < 0 || winner > 2) i--;
+      rounds[roundsComplete][i].setWinner(winner);
     }
-    system("clear");
-    displayBracket();
-    int winner;
-    std::cout << std::endl;
-    std::cout << "Winner for Game " << i + 1 << " [ 1 / 2 ]: ";
-    std::cin >> winner;
-    if (winner < 0 || winner > 2) i--;
-    rounds[roundsComplete][i].setWinner(winner);
+    roundsComplete++;
+    nextRound();
   }
-  roundsComplete++;
-  nextRound();
+  displayBracket();
+  int winner;
+  std::cout << std::endl;
+  while (winner != 1 && winner != 2) {
+    std::cout << "Winner for Finals [ 1 / 2 ]: ";
+    std::cin >> winner;
+  }
+  rounds[roundsComplete][0].setWinner(winner);
+  displayBracket();
+  std::cout << "The Winner is: " << rounds[roundsComplete][0].winner->getName() << std::endl;
 }
 
 void SingleElim::nextRound() {
