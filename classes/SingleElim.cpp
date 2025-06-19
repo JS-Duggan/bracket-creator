@@ -27,17 +27,6 @@ void SingleElim::createBracket() {
   }
   rounds.push_back(newRound);
 
-  for (int round = 1; round < static_cast<int>(std::ceil(participants / 2.0)); round++) {
-    std::vector<Pairing> currRound;
-    for (int i = 0; i < rounds[round-1].size(); i+=2) {
-      if (rounds[round-1][i+1].winner != nullptr) {
-        currRound.push_back(Pairing(rounds[round-1][i].winner, rounds[round-1][i+1].winner));
-      } else {
-        currRound.push_back(Pairing(rounds[round-1][i].winner, new Player("Bye"))); 
-      }
-    }
-    rounds.push_back(currRound);
-  }
 }
 
 void SingleElim::runBracket() {
@@ -56,5 +45,18 @@ void SingleElim::runBracket() {
     rounds[roundsComplete][i].setWinner(winner);
   }
   roundsComplete++;
+  nextRound();
 }
 
+void SingleElim::nextRound() {
+  std::vector<Pairing> newRound;
+  int participants = rounds[roundsComplete - 1].size();
+  for (int i = 0; i < participants; i+=2) {
+    if (i+1 >= participants) {
+      newRound.push_back(Pairing(rounds[roundsComplete-1][i].winner, new Player("Bye")));
+    } else {
+      newRound.push_back(Pairing(rounds[roundsComplete-1][i].winner, rounds[roundsComplete-1][i+1].winner));
+    }
+  }
+  rounds.push_back(newRound);
+}

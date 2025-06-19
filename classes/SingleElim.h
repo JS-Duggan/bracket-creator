@@ -8,6 +8,7 @@ public:
   SingleElim(std::vector<Player> players);
   void createBracket();
   void runBracket();
+  void nextRound();
 };
 
 #endif

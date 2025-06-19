@@ -12,6 +12,7 @@ public:
   void displayBracket();
   virtual void createBracket()=0;
   virtual void runBracket()=0;
+  virtual void nextRound()=0;
   
 protected:
   std::vector<Player> players;
